@@ -238,7 +238,7 @@ function love.update(dt)
     end
 
     --
-    -- paddles can move no matter what state we're in
+    --- paddles can move no matter what state we're in
     --
     -- player 1
   --  if love.keyboard.isDown('w') then

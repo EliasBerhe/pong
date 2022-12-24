@@ -140,10 +140,14 @@ function love.update(dt)
         -- before switching to play, initialize ball's velocity based
         -- on player who last scored
         ball.dy = math.random(-50, 50)
+        
         if servingPlayer == 1 then
             ball.dx = math.random(140, 200)
+            
         else
             ball.dx = -math.random(140, 200)
+            player1.y = ball.y
+            player1.dy = ball.dy
         end
     elseif gameState == 'play' then
         -- detect ball collision with paddles, reversing dx if true and
@@ -169,10 +173,14 @@ function love.update(dt)
             -- keep velocity going in the same direction, but randomize it
             if ball.dy < 0 then
                 ball.dy = -math.random(10, 150)
+               
             else
                 ball.dy = math.random(10, 150)
+                
             end
-
+          player1.y = ball.y
+      
+            player1.dy =  ball.dy
             sounds['paddle_hit']:play()
         end
 
@@ -182,6 +190,8 @@ function love.update(dt)
             ball.y = 0
             ball.dy = -ball.dy
             sounds['wall_hit']:play()
+        
+            player1.dy = ball.dy
         end
 
         -- -4 to account for the ball's size
@@ -189,6 +199,8 @@ function love.update(dt)
             ball.y = VIRTUAL_HEIGHT - 4
             ball.dy = -ball.dy
             sounds['wall_hit']:play()
+       
+            player1.dy = ball.dy
         end
 
         -- if we reach the left or right edge of the screen, go back to serve
@@ -229,13 +241,13 @@ function love.update(dt)
     -- paddles can move no matter what state we're in
     --
     -- player 1
-    if love.keyboard.isDown('w') then
-        player1.dy = -PADDLE_SPEED
-    elseif love.keyboard.isDown('s') then
-        player1.dy = PADDLE_SPEED
-    else
-        player1.dy = 0
-    end
+  --  if love.keyboard.isDown('w') then
+    --    player1.dy = -PADDLE_SPEED
+    --elseif love.keyboard.isDown('s') then
+      --  player1.dy = PADDLE_SPEED
+    --else
+       -- player1.dy = 0
+    --end
 
     -- player 2
     if love.keyboard.isDown('up') then
